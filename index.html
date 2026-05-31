@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>표선중 사랑의 바자회 🎪</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #2d6a4f;
+  --green2: #40916c;
+  --green3: #74c69d;
+  --amber: #e76f00;
+  --amber2: #ff9a3c;
+  --cream: #fffdf7;
+  --warm: #f9f3e8;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light: #f0f0ea;
+  --border: #e0d8c8;
+  --red: #c0392b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(160deg, var(--green) 0%, #1b4332 100%);
+  color: white;
+  padding: 36px 20px 28px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: -20px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.header-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--amber);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.header-sub {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+.header-info {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.header-badge {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* NAV TABS */
+.tabs {
+  display: flex;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex: none;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab.active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  font-weight: 700;
+}
+
+/* SECTIONS */
+.section {
+  display: none;
+  padding: 0 0 80px;
+}
+.section.active { display: block; }
+
+/* HOT SECTION */
+.hot-header {
+  padding: 20px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.hot-header h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--amber);
+}
+.hot-header p { font-size: 12px; color: var(--gray); margin-top: 2px; }
+
+/* HOT CARDS — 가로 스크롤 */
+.hot-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.hot-scroll::-webkit-scrollbar { display: none; }
+.hot-card {
+  flex: none;
+  width: 160px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+.hot-card:active { transform: scale(0.97); }
+.hot-badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: var(--amber);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  z-index: 2;
+}
+.hot-card-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: var(--warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.hot-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hot-card-body {
+  padding: 10px 12px 12px;
+}
+.hot-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.hot-card-desc {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.hot-card-price {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--amber);
+}
+
+/* CATEGORY HEADER */
+.cat-header {
+  padding: 20px 16px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cat-header h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--green);
+}
+
+/* PRODUCT GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 12px 16px;
+}
+
+/* PRODUCT CARD */
+.product-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.product-card:active { transform: scale(0.97); }
+.product-img {
+  width: 100%;
+  height: 110px;
+  background: var(--warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  position: relative;
+  overflow: hidden;
+}
+.product-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.product-img .placeholder {
+  font-size: 44px;
+  line-height: 1;
+}
+.product-body {
+  padding: 10px 10px 12px;
+}
+.product-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.product-desc {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-price {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--green);
+}
+.product-more {
+  font-size: 10px;
+  color: var(--amber);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  align-items: flex-end;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: white;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-overlay.open .modal {
+  transform: translateY(0);
+}
+.modal-handle {
+  width: 40px; height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+  margin: 12px auto 0;
+}
+.modal-img {
+  width: 100%;
+  height: 220px;
+  background: var(--warm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.modal-img img { width: 100%; height: 100%; object-fit: cover; }
+.modal-img .placeholder { font-size: 80px; }
+.modal-hot-badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: var(--amber);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+.modal-body {
+  padding: 20px 20px 36px;
+}
+.modal-cat {
+  font-size: 11px;
+  color: var(--green2);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.modal-name {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.modal-price {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+.modal-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 16px;
+}
+.modal-detail {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #444;
+}
+.modal-close {
+  display: block;
+  width: 100%;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* FOOTER */
+.footer {
+  background: #1b4332;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.footer a {
+  color: var(--green3);
+  text-decoration: none;
+}
+
+/* DIVIDER */
+.section-divider {
+  height: 8px;
+  background: var(--light);
+  margin: 4px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-label">🎪 표선중 학교운영위원회</div>
+  <h1>사랑의 바자회<br>판매 상품 안내</h1>
+  <div class="header-sub">구매 수익 전액 → 학교발전기금 기탁</div>
+  <div class="header-info">
+    <div class="header-badge">📅 6월 13일(토)</div>
+    <div class="header-badge">📍 표선면다목적회관</div>
+    <div class="header-badge">🕘 09:00 ~ 18:00</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('all')">🔥 핫 아이템</div>
+  <div class="tab" onclick="showTab('food')">🍱 현장 음식</div>
+  <div class="tab" onclick="showTab('fp')">🛒 식품·포장</div>
+  <div class="tab" onclick="showTab('goods')">📦 공산품</div>
+</div>
+
+<!-- HOT SECTION -->
+<div class="section active" id="tab-all">
+  <div class="hot-header">
+    <div>
+      <h2>🔥 이번 바자회 핫 아이템</h2>
+      <p>특별히 눈여겨 볼 상품들을 먼저 소개합니다</p>
+    </div>
+  </div>
+  <div class="hot-scroll" id="hot-scroll"></div>
+
+  <div class="section-divider"></div>
+
+  <div class="cat-header"><h2>🍱 현장 음식</h2></div>
+  <div class="product-grid" id="food-preview"></div>
+
+  <div class="section-divider"></div>
+
+  <div class="cat-header"><h2>🛒 식품·포장</h2></div>
+  <div class="product-grid" id="fp-preview"></div>
+
+  <div class="section-divider"></div>
+
+  <div class="cat-header"><h2>📦 공산품</h2></div>
+  <div class="product-grid" id="goods-preview"></div>
+</div>
+
+<!-- FOOD SECTION -->
+<div class="section" id="tab-food">
+  <div class="cat-header">
+    <div>
+      <h2>🍱 현장 음식</h2>
+      <p style="font-size:12px;color:var(--gray);margin-top:2px;">당일 현장에서 직접 조리해 따끈따끈하게 제공합니다</p>
+    </div>
+  </div>
+  <div class="product-grid" id="food-grid"></div>
+</div>
+
+<!-- FOOD PRODUCT SECTION -->
+<div class="section" id="tab-fp">
+  <div class="cat-header">
+    <div>
+      <h2>🛒 식품·포장</h2>
+      <p style="font-size:12px;color:var(--gray);margin-top:2px;">집에 가져가는 제주산 먹거리</p>
+    </div>
+  </div>
+  <div class="product-grid" id="fp-grid"></div>
+</div>
+
+<!-- GOODS SECTION -->
+<div class="section" id="tab-goods">
+  <div class="cat-header">
+    <div>
+      <h2>📦 공산품</h2>
+      <p style="font-size:12px;color:var(--gray);margin-top:2px;">생활에 유용한 실용 아이템</p>
+    </div>
+  </div>
+  <div class="product-grid" id="goods-grid"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-img" id="modal-img"></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modal-cat"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-detail" id="modal-detail"></div>
+      <button class="modal-close" onclick="closeModal()">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  표선중학교 학교운영위원회<br>
+  문의: 각 학년 대의원 단톡방<br>
+  <a href="https://map.naver.com/v5/search/표선면다목적회관">📍 표선면다목적회관 지도 보기</a>
+</div>
+
+<script>
+const IMAGES = {
+  "키위 생과즙": "https://i.imgur.com/placeholder.jpg",
+  "초당 옥수수": "https://i.imgur.com/placeholder.jpg",
+  "미숫가루": "https://i.imgur.com/placeholder.jpg",
+  "캠핑랜턴": "https://i.imgur.com/placeholder.jpg",
+  "쿨링 선스틱": "https://i.imgur.com/placeholder.jpg",
+  "UV 초경량 우산 (83g)": "https://i.imgur.com/placeholder.jpg",
+};
+
+const PRODUCTS = {
+  hot: [
+    { name:"키위 생과즙", price:"4,000원", cat:"현장음식", emoji:"🥝",
+      desc:"제주산 키위 100% 착즙! 설레임처럼 팩에 담아 시원하게 제공합니다.",
+      detail:"제주도에서 직접 재배한 키위를 100% 착즙해 팩에 담은 건강 음료. 인공 첨가물 없이 키위 본연의 달콤새콤한 맛을 그대로 즐기세요. 더운 여름 바자회에서 시원하게 즐기기 딱 좋은 인기 아이템!",
+      imgSearch:"https://search.pstatic.net/common/?src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20221117_36%2F1668649831025FQM5V_JPEG%2F1668649831019.jpg"},
+    { name:"초당 옥수수", price:"12,000원", cat:"식품", emoji:"🌽",
+      desc:"생으로 먹어도 달콤! 일반 옥수수보다 당도 2~3배 높은 프리미엄 옥수수.",
+      detail:"초당 옥수수는 일반 옥수수보다 당도가 2~3배 높아 생으로 먹어도 달콤합니다. 삶거나 구워 먹으면 더욱 맛있는 여름 대표 간식. 아이부터 어른까지 모두 좋아하는 프리미엄 옥수수!",
+      imgSearch:"https://search.pstatic.net/common/?src=https%3A%2F%2Fshop-phinf.pstatic.net%2F20220705_197%2F1657017093316LZKDO_JPEG%2F1657017093311.jpg"},
+    { name:"미숫가루", price:"15,000원", cat:"식품", emoji:"🌾",
+      desc:"국산 잡곡을 볶아 만든 고소한 미숫가루. 물·우유에 타면 든든한 건강 음료!",
+      detail:"국산 잡곡을 정성껏 볶아 갈아 만든 프리미엄 미숫가루. 물이나 우유에 타서 마시면 든든하고 고소한 건강 음료가 됩니다. 온 가족이 즐길 수 있는 건강 식품!",
+      imgSearch:""},
+    { name:"캠핑랜턴", price:"25,000원", cat:"공산품", emoji:"🏕️",
+      desc:"충전식 LED 캠핑랜턴. 밝기 조절 가능, 캠핑·낚시·정전 대비 필수템!",
+      detail:"충전식 LED 캠핑랜턴으로 밝기 조절이 가능합니다. 가볍고 튼튼한 소재로 캠핑, 낚시, 정전 대비까지 두루 활용 가능한 실용 아이템. 1회 충전으로 오래 사용 가능!",
+      imgSearch:""},
+    { name:"쿨링 선스틱", price:"12,000원", cat:"공산품", emoji:"✨",
+      desc:"바르는 즉시 시원한 쿨링! 자외선 차단+쿨링+피부 진정 3가지 효과. SPF50+",
+      detail:"김정문 알로에 큐어라센스로에 쿨링 선스틱. 바르는 즉시 시원한 쿨링 효과! 자외선 차단, 쿨링, 피부 진정까지 한 번에 해결. 야외 활동이 많은 제주에서 필수 아이템. SPF50+ PA++++",
+      imgSearch:""},
+    { name:"UV 초경량 우산 (83g)", price:"25,000원", cat:"공산품", emoji:"☂️",
+      desc:"겨우 83g! 손바닥만한 미니우산. UV차단 코팅으로 햇볕도 비도 막아주는 사계절 필수템.",
+      detail:"UV헌터스 초경량 우산 (83g). 놀랍도록 가벼운 83g! 가방 어디든 쏙 들어가는 휴대성 최강 우산. UV차단 코팅으로 자외선 차단율 99% 이상. 비와 햇볕 모두 OK!",
+      imgSearch:""},
+  ],
+  food: [
+    { name:"소떡소떡", price:"3,000원", emoji:"🍢", desc:"소시지+떡 꼬치, 달콤매콤 소스와 함께", detail:"바삭하게 구운 소시지와 쫄깃한 떡을 번갈아 꽂은 인기 꼬치. 달콤매콤한 소스를 발라 더욱 맛있습니다. 남녀노소 모두 좋아하는 바자회 스테디셀러!"},
+    { name:"닭꼬치", price:"3,000원", emoji:"🍗", desc:"부드러운 닭고기를 달콤짭짤한 양념에 재워 구운 꼬치", detail:"부드러운 닭고기를 달콤짭짤한 양념에 재워 구운 고소한 꼬치. 겉은 바삭하고 속은 촉촉!"},
+    { name:"김밥", price:"4,000원", emoji:"🍙", desc:"작년 판매 1위! 속재료 듬뿍 정성껏 만든 김밥", detail:"작년 바자회 판매 1위 465줄! 신선한 재료와 속재료를 듬뿍 넣어 정성껏 만든 김밥. 한 줄만 먹어도 배부른 든든한 한 끼입니다."},
+    { name:"떡볶이", price:"5,000원", emoji:"🌶️", desc:"쫄깃한 떡에 매콤달콤한 양념 듬뿍. 밀키트 포장 판매도!", detail:"쫄깃한 떡에 매콤달콤한 양념을 듬뿍 넣은 떡볶이. 현장 조리로 따끈따끈하게 제공! 집에서도 즐길 수 있는 밀키트 포장 판매도 함께 진행합니다."},
+    { name:"국수", price:"8,000원", emoji:"🍜", desc:"시원하고 깔끔한 국물 국수. 더운 날 후루룩 먹기 딱!", detail:"면 요리 선호 의견이 많아 새로 추가된 메뉴! 시원하고 깔끔한 국물에 쫄깃한 면발. 더운 여름 바자회에서 후루룩 먹기 딱 좋습니다."},
+    { name:"해물전", price:"10,000원", emoji:"🥘", desc:"신선한 해물 듬뿍 넣어 노릇노릇 구운 제주 스타일 부침개", detail:"신선한 해물을 듬뿍 넣어 노릇노릇하게 구운 전. 바삭한 겉면과 쫄깃한 속이 일품인 제주 스타일 해물 부침개!"},
+    { name:"제주 기름떡 (3개)", price:"5,000원", emoji:"🍡", desc:"제주 전통 향토음식! 생지 직접 구입해 현장에서 만드는 정성 가득 기름떡", detail:"제주 전통 향토음식 기름떡! 생지를 직접 구입해 현장에서 만드는 정성 가득한 떡. 기름에 지져 고소하고 달콤한 제주의 맛을 느껴보세요."},
+    { name:"키위 생과즙", price:"4,000원", emoji:"🥝", desc:"제주산 키위 100% 착즙! 설레임처럼 팩에 담아 시원하게", detail:"제주도에서 직접 재배한 키위를 100% 착즙해 팩에 담은 건강 음료. 더운 여름 바자회에서 시원하게 즐기기 딱 좋은 인기 아이템!"},
+  ],
+  fp: [
+    { name:"들기름", price:"15,000원", emoji:"🫙", desc:"국산 들깨 압착, 고소하고 신선한 들기름", detail:"국산 들깨를 직접 압착한 고소하고 신선한 들기름. 나물 무침, 볶음, 국 등 다양하게 활용 가능한 건강 식용유."},
+    { name:"참기름", price:"13,000원", emoji:"🫙", desc:"국산 참깨 100%로 만든 향긋하고 고소한 참기름", detail:"국산 참깨 100%로 만든 향긋하고 고소한 참기름. 어떤 요리에도 풍미를 더해주는 주방 필수품!"},
+    { name:"제주 유채꿀", price:"15,000원", emoji:"🍯", desc:"제주 유채꽃밭에서 채취한 순수 천연 꿀", detail:"제주 유채꽃밭에서 채취한 순수 천연 꿀. 은은한 꽃향기와 달콤함이 특징인 제주 대표 특산물입니다."},
+    { name:"미숫가루", price:"15,000원", emoji:"🌾", desc:"국산 잡곡을 볶아 만든 고소한 미숫가루", detail:"국산 잡곡을 정성껏 볶아 갈아 만든 프리미엄 미숫가루. 온 가족이 즐길 수 있는 건강 식품!"},
+    { name:"소금빵", price:"3,000원", emoji:"🥐", desc:"겉은 바삭, 속은 촉촉한 버터 소금빵. 베이커리 인기템!", detail:"겉은 바삭하고 속은 촉촉한 버터 소금빵. 달지 않고 고소해서 누구나 좋아하는 베이커리 인기 아이템!"},
+    { name:"초당 옥수수", price:"12,000원", emoji:"🌽", desc:"생으로 먹어도 달콤! 당도 높은 프리미엄 초당옥수수", detail:"초당 옥수수는 일반 옥수수보다 당도가 2~3배 높아 생으로 먹어도 달콤합니다. 여름 대표 간식!"},
+    { name:"아귀포 / 쥐포", price:"13,000원", emoji:"🐟", desc:"쫄깃하고 고소한 건어물 안주. 구워 먹으면 더욱 맛있는 전통 간식", detail:"쫄깃하고 고소한 건어물 안주. 구워 먹으면 더욱 맛있는 전통 간식. 아이들 간식부터 어른 안주까지 활용 만점!"},
+  ],
+  goods: [
+    { name:"떡볶이 소스", price:"5,000원", emoji:"🌶️", desc:"현장 그 맛 그대로! 집에서도 바자회 떡볶이 맛 재현 비법 소스", detail:"현장에서 판매하는 그 맛 그대로! 집에서도 바자회 떡볶이 맛을 재현할 수 있는 비법 소스. 포장 판매합니다."},
+    { name:"캠핑랜턴", price:"25,000원", emoji:"🏕️", desc:"충전식 LED 캠핑랜턴. 밝기 조절 가능, 가볍고 튼튼!", detail:"충전식 LED 캠핑랜턴으로 밝기 조절이 가능합니다. 가볍고 튼튼한 소재로 캠핑, 낚시, 정전 대비까지 두루 활용 가능한 실용 아이템."},
+    { name:"더마 선크림", price:"10,000원", emoji:"🌿", desc:"김정문 알로에 더마 선크림. 자외선 차단+피부 진정 SPF50+", detail:"김정문 알로에 더마 선크림. 알로에 성분으로 자외선 차단과 피부 진정을 동시에. 40ml 휴대용 사이즈. SPF50+"},
+    { name:"쿨링 선스틱", price:"12,000원", emoji:"✨", desc:"바르는 즉시 시원한 쿨링! 자외선 차단+쿨링+피부 진정 SPF50+", detail:"바르는 즉시 시원한 쿨링 효과! 자외선 차단, 쿨링, 피부 진정까지 한 번에 해결. 야외 활동 필수 아이템. SPF50+ PA++++"},
+    { name:"UV우산 3단 자동", price:"25,000원", emoji:"☂️", desc:"원터치 자동 개폐, 자외선 차단 코팅. 비와 햇볕 모두 OK!", detail:"UV헌터스 3단 자동우산. 원터치 자동 개폐로 편리하고 자외선 차단 코팅으로 햇볕도 비도 막아주는 사계절 우산."},
+    { name:"UV 초경량 우산 (83g)", price:"25,000원", emoji:"☂️", desc:"겨우 83g! 가방에 쏙 들어가는 미니우산. UV차단율 99%+", detail:"UV헌터스 초경량 우산 (83g). 놀랍도록 가벼운 83g! 가방 어디든 쏙 들어가는 휴대성 최강 우산. UV차단 코팅 자외선 차단율 99% 이상."},
+    { name:"코인 육수", price:"10,000원", emoji:"🍲", desc:"천연 재료로 만든 편리한 코인형 육수. 라면·찌개·국 어디든!", detail:"천연 재료로 만든 편리한 코인형 육수. 뜨거운 물에 넣으면 바로 완성되는 깊고 진한 국물. 라면, 찌개, 국 어디든 활용 가능!"},
+    { name:"꼬막 비빔장", price:"5,000원", emoji:"🦪", desc:"밥 한 공기 뚝딱! 꼬막 듬뿍 들어간 진한 비빔장", detail:"밥 한 공기 뚝딱! 꼬막이 듬뿍 들어간 진한 비빔장. 비빔밥, 비빔국수, 무침 등 다양하게 활용 가능한 만능 소스."},
+    { name:"순살 갈비탕", price:"5,000원", emoji:"🍖", desc:"뼈 없는 순살 갈비탕. 진한 사골 국물에 부드러운 갈비살. 데워서 바로!", detail:"뼈 없는 순살 갈비탕. 진한 사골 국물에 부드러운 갈비살. 데워서 바로 먹는 프리미엄 간편식!"},
+  ]
+};
+
+function imgEl(emoji) {
+  return `<div class="placeholder">${emoji}</div>`;
+}
+
+function openModal(p, isHot) {
+  document.getElementById('modal-img').innerHTML = imgEl(p.emoji) + (isHot ? '<div class="modal-hot-badge">🔥 HOT</div>' : '');
+  document.getElementById('modal-cat').textContent = p.cat || '';
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-detail').textContent = p.detail;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modal')) return;
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function hotCard(p) {
+  return `<div class="hot-card" onclick='openModal(${JSON.stringify(p)}, true)'>
+    <div class="hot-badge">🔥 HOT</div>
+    <div class="hot-card-img">${imgEl(p.emoji)}</div>
+    <div class="hot-card-body">
+      <div class="hot-card-name">${p.name}</div>
+      <div class="hot-card-desc">${p.desc}</div>
+      <div class="hot-card-price">${p.price}</div>
+    </div>
+  </div>`;
+}
+
+function productCard(p) {
+  return `<div class="product-card" onclick='openModal(${JSON.stringify(p)}, false)'>
+    <div class="product-img">${imgEl(p.emoji)}</div>
+    <div class="product-body">
+      <div class="product-name">${p.name}</div>
+      <div class="product-desc">${p.desc}</div>
+      <div class="product-price">${p.price}</div>
+      <div class="product-more">자세히 보기 →</div>
+    </div>
+  </div>`;
+}
+
+// 렌더링
+document.getElementById('hot-scroll').innerHTML = PRODUCTS.hot.map(hotCard).join('');
+
+['food','fp','goods'].forEach(key => {
+  const preview = document.getElementById(key + '-preview');
+  const grid = document.getElementById(key + '-grid');
+  const cards = PRODUCTS[key].map(productCard).join('');
+  if (preview) preview.innerHTML = cards;
+  if (grid) grid.innerHTML = cards;
+});
+</script>
+</body>
+</html>
